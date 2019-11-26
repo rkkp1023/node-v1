@@ -1,5 +1,4 @@
-const loginDetail = require('../model/login.js');
-
+const register = require('../model/register.js');
 
 const env = require('../config/database.config');
 
@@ -17,11 +16,11 @@ mongoose.connect(env.databasecon, {
     process.exit();
 });
 //Save Api
-exports.login = (req, res) => {
+exports.register = (req, res) => {
     console.log("body", req.body);
-    // res.data = req.body;
-    var loginSave = new loginDetail(req.body);
-    loginSave.save()
+
+    var registerSave = new register(req.body);
+    registerSave.save()
         .then(documents => {
             console.log("the document", documents);
             //     res.send("data" + documents);
@@ -41,6 +40,8 @@ exports.login = (req, res) => {
 }
 // get Api
 exports.getLoginData = (req, res) => {
+    console.log("REq", req);
+
     loginDetail.find().then(
         document => {
             res.status(200).json(({
